@@ -57,7 +57,7 @@ class db():
             UPDATE users
             SET key = ?
             WHERE username = ? AND password = ?
-        ''', (self.new_key, self.username, hashed_password))
+        ''', (self.key, self.username, hashed_password))
 
     def getUserKey(self):
         conn = sqlite3.connect('user_data.db')
