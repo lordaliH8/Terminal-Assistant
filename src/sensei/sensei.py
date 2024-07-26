@@ -1,14 +1,18 @@
 from datetime import datetime
 
+from src.llm import GPT
+
 
 class Sensei:
 
     def __init__(self, sensei_id: str):
         self.sensei_id = sensei_id
         self.created_at = datetime.now()
+        self.model = GPT()
 
     def initial_decision(self, query: str) -> dict:
         # TODO: Fill
+        # self.model.query...
         pass
 
     def ask(self, query: str) -> dict:
