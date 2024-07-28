@@ -16,7 +16,8 @@ def create_prompt_table(cursor):
         """
             CREATE TABLE IF NOT EXISTS prompt (
                 user_prompt TEXT PRIMARY KEY,
-                gpt_prompt TEXT NOT NULL
+                gpt_prompt TEXT NOT NULL,
+                date DATETIME NOT NULL
             )
         """
     )
@@ -28,7 +29,17 @@ def create_history_table(cursor):
         """
             CREATE TABLE IF NOT EXISTS history (
                 command TEXT PRIMARY KEY,
-                result TEXT NOT NULL
+                result TEXT NOT NULL,
+                date DATETIME NOT NULL
             )
+        """
+    )
+
+
+# Insert into GPT Table
+def insert_into_gpt_table(cursor, api_key, cost):
+    cursor.execute(
+        f"""
+        INSERT INTO gpt(api_key, cost) values('{api_key}', '{cost}')
         """
     )
