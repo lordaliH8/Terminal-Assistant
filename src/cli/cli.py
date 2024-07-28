@@ -10,32 +10,37 @@ argsList = sys.argv[1:]
 shortopts = "hvm:"
 
 # Long Options
-longopts = ["help", "version", "msg=", "config="]
+longopts = ["help", "version", "msg=", "config=", "import="]
 
 try:
     # Parsing Argument(s)
-    args, values = getopt.getopt(argsList, shortopts, longopts)
+    opts, args = getopt.getopt(argsList, shortopts, longopts)
 
     # Checking Each Arguments
-    for currentArgs, currentValue in args:
+    for currentOpts, currentArgs in opts:
 
         # Help Handler
-        if currentArgs in ("-h", "--help"):
+        if currentOpts in ("-h", "--help"):
             src.cli.service.show_help()
 
         # Version Handler
-        if currentArgs in ("-v", "--version"):
+        if currentOpts in ("-v", "--version"):
             src.cli.service.show_version()
 
         # Message Handler
-        if currentArgs in ("-m", "--msg"):
-            msg = currentValue
+        if currentOpts in ("-m", "--msg"):
+            msg = currentArgs
             src.cli.service.output(msg)
 
         # Config Handler
-        if currentArgs in ("--config"):
-            if currentValue == "init":
+        if currentOpts in ("--config"):
+            if currentArgs == "init":
                 src.cli.service.init_db()
+
+        # Import Handler
+        if currentOpts in ("--import"):
+            api_key = currentArgs
+            src.cli.service.import_gpt_api_key(api_key)
 
 except getopt.error as err:
     # Output Error, and Return with an Error Code

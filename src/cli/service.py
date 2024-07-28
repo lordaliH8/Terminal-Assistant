@@ -32,6 +32,11 @@ def show_help():
         action="help",
         help="Init DataBase and Config File",
     )
+    parser.add_argument(
+        "--import <API_KEY>",
+        action="help",
+        help="Import your GPT API Key",
+    )
 
     # Print Help
     parser.print_help()
@@ -45,6 +50,11 @@ def show_version():
 # Initialize DataBase
 def init_db():
     src.db.db.init()
+
+
+# Import GPT API Key
+def import_gpt_api_key(api_key):
+    src.db.db.import_gpt_api_key(api_key)
 
 
 def output(msg):
