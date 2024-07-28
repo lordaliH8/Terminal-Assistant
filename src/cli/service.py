@@ -1,5 +1,6 @@
 # Imports
 import argparse
+import src.db.db
 
 # Global Variables
 app_name = "shellsensei"
@@ -27,17 +28,23 @@ def show_help():
         help="Getting the Message to do the Desired Task",
     )
     parser.add_argument(
-        "--config <API-KEY>",
+        "--config init",
         action="help",
-        help="Override a GPT API Key Value",
+        help="Init DataBase and Config File",
     )
 
     # Print Help
     parser.print_help()
 
 
+# Show Version
 def show_version():
     print(f"{app_name} version {app_version}")
+
+
+# Initialize DataBase
+def init_db():
+    src.db.db.init()
 
 
 def output(msg):
