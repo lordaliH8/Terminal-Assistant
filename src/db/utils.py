@@ -23,11 +23,11 @@ def create_prompt_table(cursor):
     )
 
 
-# Create History Table
-def create_history_table(cursor):
+# Create CMD Table
+def create_cmd_table(cursor):
     cursor.execute(
         """
-            CREATE TABLE IF NOT EXISTS history (
+            CREATE TABLE IF NOT EXISTS cmd (
                 command TEXT PRIMARY KEY,
                 result TEXT NOT NULL,
                 date DATETIME NOT NULL
@@ -41,5 +41,50 @@ def insert_into_gpt_table(cursor, api_key, cost):
     cursor.execute(
         f"""
         INSERT INTO gpt(api_key, cost) values('{api_key}', '{cost}')
+        """
+    )
+
+
+# Select * from CMD Table with Limit
+def select_from_cmd_table(cursor, limit):
+    return cursor.execute(
+        f"""
+        SELECT command, result FROM cmd ORDER BY date DESC LIMIT {limit}
+        """
+    ).fetchall()
+
+
+# Select * from Prompt Table with Limit
+def select_from_prompt_table(cursor, limit):
+    return cursor.execute(
+        f"""
+        SELECT user_prompt, gpt_prompt FROM prompt ORDER BY date DESC LIMIT {limit}
+        """
+    ).fetchall()
+
+
+# Delete All Rows from GPT Table
+def delete_from_gpt_table(cursor):
+    cursor.execute(
+        f"""
+        DELETE FROM gpt
+        """
+    )
+
+
+# Delete All Rows from Prompt Table
+def delete_from_prompt_table(cursor):
+    cursor.execute(
+        f"""
+        DELETE FROM prompt
+        """
+    )
+
+
+# Delete All Rows from CMD Table
+def delete_from_cmd_table(cursor):
+    cursor.execute(
+        f"""
+        DELETE FROM cmd
         """
     )
