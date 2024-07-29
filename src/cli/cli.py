@@ -56,6 +56,21 @@ try:
                             raise getopt.error("too many arguments")
                         else:
                             src.cli.service.show_location()
+                    case "rm" if values[0] == "cmd" and len(values) == 1:
+                        src.db.db.clean_cmd_table()
+                    case "rm" if values[0] == "prompt" and len(values) == 1:
+                        print("dadas")
+                        src.db.db.clean_prompt_table()
+                    case "reset":
+                        if len(argsList) != 2:
+                            raise getopt.error("too many arguments")
+                        src.db.db.reset()
+                # Error Handling for "Too Many Arguments"
+                if len(values) > 1:
+                    raise getopt.error("too many arguments")
+                # Error Handling for "Wrong Arguments"
+                elif currentArgs not in ("init", "location", "rm", "reset"):
+                    raise getopt.error("wrong argument")
 
             # Import Handler
             case "--import":
@@ -67,6 +82,7 @@ try:
 
             # Show Handler
             case "--show":
+                # Switch Case on currentArgs Variable
                 match currentArgs:
                     # CMD
                     case "cmd" if len(values) == 0:
