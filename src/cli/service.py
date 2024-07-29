@@ -9,7 +9,7 @@ app_version = "0.1"
 # Show Help
 def show_help():
     description = f"{app_name} - AI Terminal Assistant"
-    usage = "sensei <OPTIONS> [ARGS] [NUMS]"
+    usage = "sensei <OPTIONS> [ARGS] [NUMS][TABLES]"
 
     # Initialize Parser
     parser = argparse.ArgumentParser(
@@ -37,19 +37,24 @@ def show_help():
         help="Show DataBase and Config File Location",
     )
     parser.add_argument(
+        "--config rm <TABLE>",
+        action="help",
+        help="Delete All Rows from <cmd/prompt> Table",
+    )
+    parser.add_argument(
+        "--config reset",
+        action="help",
+        help="Reset All Data",
+    )
+    parser.add_argument(
         "--import <API_KEY>",
         action="help",
         help="Import your GPT API Key",
     )
     parser.add_argument(
-        "--show cmd [NUM]",
+        "--show <TABLE> [NUM]",
         action="help",
-        help="Show Last [NUM] Command",
-    )
-    parser.add_argument(
-        "--show prompt [NUM]",
-        action="help",
-        help="Show Last [NUM] Prompt",
+        help="Show Last [NUM] Command from <cmd/prompt> Table",
     )
 
     # Print Help
