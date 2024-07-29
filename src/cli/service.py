@@ -1,6 +1,5 @@
 # Imports
 import argparse
-import src.db.db
 
 # Global Variables
 app_name = "shellsensei"
@@ -10,7 +9,7 @@ app_version = "0.1"
 # Show Help
 def show_help():
     description = f"{app_name} - AI Terminal Assistant"
-    usage = "sensei <OPTIONS> [ARGS]"
+    usage = "sensei <OPTIONS> [ARGS] [NUMS]"
 
     # Initialize Parser
     parser = argparse.ArgumentParser(
@@ -33,9 +32,24 @@ def show_help():
         help="Init DataBase and Config File",
     )
     parser.add_argument(
+        "--config location",
+        action="help",
+        help="Show DataBase and Config File Location",
+    )
+    parser.add_argument(
         "--import <API_KEY>",
         action="help",
         help="Import your GPT API Key",
+    )
+    parser.add_argument(
+        "--show cmd [NUM]",
+        action="help",
+        help="Show Last [NUM] Command",
+    )
+    parser.add_argument(
+        "--show prompt [NUM]",
+        action="help",
+        help="Show Last [NUM] Prompt",
     )
 
     # Print Help
@@ -47,14 +61,9 @@ def show_version():
     print(f"{app_name} version {app_version}")
 
 
-# Initialize DataBase
-def init_db():
-    src.db.db.init()
-
-
-# Import GPT API Key
-def import_gpt_api_key(api_key):
-    src.db.db.import_gpt_api_key(api_key)
+# Show DataBase and Config File Location
+def show_location():
+    print("~/.local/share/shellsensei/")
 
 
 def output(msg):
