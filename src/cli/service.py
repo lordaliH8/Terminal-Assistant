@@ -56,6 +56,11 @@ def show_help():
         action="help",
         help="Show Last [NUM] Command from <cmd/prompt> Table",
     )
+    parser.add_argument(
+        "--remove <API_KEY>",
+        action="help",
+        help="Remove GPT API Key",
+    )
 
     # Print Help
     parser.print_help()

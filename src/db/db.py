@@ -121,3 +121,24 @@ def clean_prompt_table():
     # Commit and Close Connection
     connection.commit()
     connection.close()
+
+
+# Check if API Key in GPT Table Exists
+def check_if_api_key_exists():
+    # Create Connection
+    connection = sqlite3.connect(database="shellsensei_db.db")
+    # Cursor
+    cursor = connection.cursor()
+
+    # Select GPT API Key from GPT Table
+    row = src.db.utils.select_from_gpt_table(cursor)
+    print(row)
+
+    # Commit and Close Connection
+    connection.commit()
+    connection.close()
+
+    if row is not None:
+        return True
+    else:
+        return False
