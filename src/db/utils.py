@@ -45,6 +45,15 @@ def insert_into_gpt_table(cursor, api_key, cost):
     )
 
 
+# Select GPT API Key from GPT Table
+def select_from_gpt_table(cursor):
+    return cursor.execute(
+        f"""
+        SELECT api_key from gpt
+        """
+    ).fetchone()
+
+
 # Select * from CMD Table with Limit
 def select_from_cmd_table(cursor, limit):
     return cursor.execute(
