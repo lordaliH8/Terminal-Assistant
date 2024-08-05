@@ -28,13 +28,8 @@ class Sensei:
 
     def initial_decision(self, query: str) -> dict:
         # TODO: Fill
-        query = decision_prompt.format(
-            OS=get_os(),
-            task=query
-        )
-        response = self.model.query(
-            user_prompt=query
-        )
+        query = decision_prompt.format(OS=get_os(), task=query)
+        response = self.model.query(user_prompt=query)
         response = ast.literal_eval(response)
         return response
 
@@ -42,4 +37,3 @@ class Sensei:
         # 1. Run a command or ask a question
         response = self.initial_decision(query)
         return response
-

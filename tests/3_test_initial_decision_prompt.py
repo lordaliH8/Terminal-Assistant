@@ -7,14 +7,9 @@ import ast
 model = GPT()
 task = "Install NginX"
 
-query = decision_prompt.format(
-    OS=get_os(),
-    task=task
-)
+query = decision_prompt.format(OS=get_os(), task=task)
 
-response = model.query(
-    user_prompt=query
-)
+response = model.query(user_prompt=query)
 response = ast.literal_eval(response)
 
 print("-" * 60)

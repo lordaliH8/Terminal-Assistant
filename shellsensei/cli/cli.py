@@ -93,7 +93,9 @@ try:
                                 case "n" | "N":
                                     sys.exit()
                                 case _:
-                                    user_answer = input("Please Answer with Y or N: [y/n] ")
+                                    user_answer = input(
+                                        "Please Answer with Y or N: [y/n] "
+                                    )
                     else:
                         db.import_gpt_api_key(api_key)
 
