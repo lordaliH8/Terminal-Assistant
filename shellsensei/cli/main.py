@@ -12,7 +12,7 @@ argsList = sys.argv[1:]
 shortopts = "hvm:"
 
 # Long Options
-longopts = ["help", "version", "msg=", "config=", "import=", "show="]
+longopts = ["help", "version", "msg=", "config=", "import=", "show=", "remove"]
 
 try:
     # Parsing Argument(s)
@@ -123,6 +123,24 @@ try:
                 # Error Handling for "Wrong Arguments"
                 elif currentArgs not in ("cmd", "prompt"):
                     raise getopt.error("wrong argument")
+
+            # Remove Handler
+            case "--remove":
+                if len(argsList) != 1:
+                    raise getopt.error("too many arguments")
+                else:
+                    user_answer = input(
+                        "Are you Sure you want to Delete your GPT API Key? [y/n] "
+                    )
+                    while True:
+                        match user_answer:
+                            case "y" | "Y":
+                                db.clean_gpt_table()
+                                break
+                            case "n" | "N":
+                                sys.exit()
+                            case _:
+                                user_answer = input("Please Answer with Y or N: [y/n] ")
 except getopt.error as err:
     # Output Error, and Return with an Error Code
     print(str(err))
