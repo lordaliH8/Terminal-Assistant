@@ -28,19 +28,19 @@ try:
                 if len(argsList) != 1:
                     raise getopt.error("too many arguments")
                 else:
-                    src.cli.service.show_help()
+                    service.show_help()
 
             # Version Handler
             case "-v" | "--version":
                 if len(argsList) != 1:
                     raise getopt.error("too many arguments")
                 else:
-                    src.cli.service.show_version()
+                    service.show_version()
 
             # Message Handler
             case "-m" | "--msg":
                 msg = currentArgs
-                src.cli.service.output(msg)
+                service.output(msg)
 
             # Config Handler
             case "--config":
@@ -50,21 +50,21 @@ try:
                         if len(argsList) != 2:
                             raise getopt.error("too many arguments")
                         else:
-                            src.db.db.init()
+                            db.init()
                     case "location":
                         if len(argsList) != 2:
                             raise getopt.error("too many arguments")
                         else:
-                            src.cli.service.show_location()
+                            service.show_location()
                     case "rm" if values[0] == "cmd" and len(values) == 1:
-                        src.db.db.clean_cmd_table()
+                        db.clean_cmd_table()
                     case "rm" if values[0] == "prompt" and len(values) == 1:
                         print("dadas")
-                        src.db.db.clean_prompt_table()
+                        db.clean_prompt_table()
                     case "reset":
                         if len(argsList) != 2:
                             raise getopt.error("too many arguments")
-                        src.db.db.reset()
+                        db.reset()
                 # Error Handling for "Too Many Arguments"
                 if len(values) > 1:
                     raise getopt.error("too many arguments")
@@ -78,7 +78,7 @@ try:
                     raise getopt.error("too many arguments")
                 else:
                     api_key = currentArgs
-                    check = src.db.db.check_if_api_key_exists()
+                    check = db.check_if_api_key_exists()
                     if check:
                         user_answer = input(
                             "API Key Exists - Want to Replace this API Key with the Old One? [y/n] "
@@ -86,15 +86,15 @@ try:
                         while True:
                             match user_answer:
                                 case "y" | "Y":
-                                    src.db.db.clean_gpt_table()
-                                    src.db.db.import_gpt_api_key(api_key)
+                                    db.clean_gpt_table()
+                                    db.import_gpt_api_key(api_key)
                                     break
                                 case "n" | "N":
                                     sys.exit()
                                 case _:
                                     user_answer = input("Please Answer with Y or N: [y/n] ")
                     else:
-                        src.db.db.import_gpt_api_key(api_key)
+                        db.import_gpt_api_key(api_key)
 
             # Show Handler
             case "--show":
@@ -103,17 +103,17 @@ try:
                     # CMD
                     case "cmd" if len(values) == 0:
                         limit = 1
-                        src.db.db.show_cmd_table(limit)
+                        db.show_cmd_table(limit)
                     case "cmd" if len(values) == 1:
                         limit = int(values[0])
-                        src.db.db.show_cmd_table(limit)
+                        db.show_cmd_table(limit)
                     # Prompt
                     case "prompt" if len(values) == 0:
                         limit = 1
-                        src.db.db.show_prompt_table(limit)
+                        db.show_prompt_table(limit)
                     case "prompt" if len(values) == 1:
                         limit = int(values[0])
-                        src.db.db.show_prompt_table(limit)
+                        db.show_prompt_table(limit)
                 # Error Handling for "Too Many Arguments"
                 if len(values) > 1:
                     raise getopt.error("too many arguments")
