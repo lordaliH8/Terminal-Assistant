@@ -1,4 +1,4 @@
-from src.sensei import Sensei
+from sensei import Sensei
 
 
 sensei = Sensei(sensei_id="test")

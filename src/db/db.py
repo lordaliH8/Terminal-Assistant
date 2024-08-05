@@ -1,6 +1,6 @@
 # Imports
 import sqlite3
-from src.db import utils
+from db import utils
 
 
 # Init DataBase
@@ -11,11 +11,11 @@ def init():
     cursor = connection.cursor()
 
     # GPT Table
-    src.db.utils.create_gpt_table(cursor)
+    utils.create_gpt_table(cursor)
     # Prompt Table
-    src.db.utils.create_prompt_table(cursor)
+    utils.create_prompt_table(cursor)
     # CMD Table
-    src.db.utils.create_cmd_table(cursor)
+    utils.create_cmd_table(cursor)
 
     # Commit and Close Connection
     connection.commit()
@@ -39,7 +39,7 @@ def import_gpt_api_key(api_key):
     cursor = connection.cursor()
 
     # Insert into GPT Table
-    src.db.utils.insert_into_gpt_table(cursor, api_key, cost)
+    utils.insert_into_gpt_table(cursor, api_key, cost)
 
     # Commit and Close Connection
     connection.commit()
@@ -54,7 +54,7 @@ def show_cmd_table(limit):
     cursor = connection.cursor()
 
     # Select * from CMD Table with Limit
-    rows = src.db.utils.select_from_cmd_table(cursor, limit)
+    rows = utils.select_from_cmd_table(cursor, limit)
     print(rows)
 
     # Commit and Close Connection
@@ -70,7 +70,7 @@ def show_prompt_table(limit):
     cursor = connection.cursor()
 
     # Select * from Prompt Table with Limit
-    rows = src.db.utils.select_from_prompt_table(cursor, limit)
+    rows = utils.select_from_prompt_table(cursor, limit)
     print(rows)
 
     # Commit and Close Connection
@@ -86,7 +86,7 @@ def clean_gpt_table():
     cursor = connection.cursor()
 
     # Delete * from GPT Table
-    src.db.utils.delete_from_gpt_table(cursor)
+    utils.delete_from_gpt_table(cursor)
 
     # Commit and Close Connection
     connection.commit()
@@ -101,7 +101,7 @@ def clean_cmd_table():
     cursor = connection.cursor()
 
     # Delete * from CMD Table
-    src.db.utils.delete_from_cmd_table(cursor)
+    utils.delete_from_cmd_table(cursor)
 
     # Commit and Close Connection
     connection.commit()
@@ -116,7 +116,7 @@ def clean_prompt_table():
     cursor = connection.cursor()
 
     # Delete * from Prompt Table
-    src.db.utils.delete_from_prompt_table(cursor)
+    utils.delete_from_prompt_table(cursor)
 
     # Commit and Close Connection
     connection.commit()
@@ -131,7 +131,7 @@ def check_if_api_key_exists():
     cursor = connection.cursor()
 
     # Select GPT API Key from GPT Table
-    row = src.db.utils.select_from_gpt_table(cursor)
+    row = utils.select_from_gpt_table(cursor)
     print(row)
 
     # Commit and Close Connection

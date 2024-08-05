@@ -1,8 +1,9 @@
 # Imports
 import getopt
 import sys
-from src.cli import service
-from src.db import db
+from cli import service
+from db import db
+
 
 # Arguments - Remove 1st Argument from the List
 argsList = sys.argv[1:]

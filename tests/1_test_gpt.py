@@ -1,4 +1,4 @@
-from src.llm import GPT
+from llm import GPT
 
 
 model = GPT(model="gpt-3.5-turbo")

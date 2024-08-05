@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src.llm import GPT
+from llm import GPT
 
 
 class Sensei:
