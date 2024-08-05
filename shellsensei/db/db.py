@@ -132,7 +132,6 @@ def check_if_api_key_exists():
 
     # Select GPT API Key from GPT Table
     row = utils.select_from_gpt_table(cursor)
-    print(row)
 
     # Commit and Close Connection
     connection.commit()
