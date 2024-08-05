@@ -1,6 +1,6 @@
 # Imports
 import sqlite3
-import src.db.utils
+from src.db import utils
 
 
 # Init DataBase
