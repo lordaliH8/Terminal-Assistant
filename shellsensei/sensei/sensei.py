@@ -1,7 +1,7 @@
 import ast
 from datetime import datetime
 import platform
-
+import distro
 from llm import GPT
 from sensei.prompts import decision_prompt
 
@@ -9,7 +9,7 @@ from sensei.prompts import decision_prompt
 def get_os():
     os_name = platform.system()
     if os_name == "Linux":
-        os_details = platform.linux_distribution()
+        os_details = distro.linux_distribution(full_distribution_name=False)
         return f"{os_name} ({os_details[0]} {os_details[1]})"
     elif os_name == "Darwin":
         return "macOS"
