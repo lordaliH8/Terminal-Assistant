@@ -3,6 +3,9 @@ import getopt
 import sys
 from shellsensei.cli import service
 from shellsensei.db import db
+from shellsensei.sensei import Sensei
+
+sensei = Sensei(sensei_id="test")
 
 
 if __name__ == "__main__":
@@ -42,8 +45,23 @@ if __name__ == "__main__":
 
                 # Message Handler
                 case "-m" | "--msg":
-                    msg = currentArgs
-                    service.output(msg)
+                    if len(values) != 0:
+                        raise getopt.error("too many arguments")
+                    else:
+                        msg = currentArgs
+                        response = sensei.ask(msg)
+                        print(response)
+                        while True:
+                            if response["question"]:
+                                print(response["question"])
+                                user_answer = input(response["question"] + " ")
+                                print(user_answer)
+                                break
+                            elif response["command"]:
+                                print(response["command"])
+                                break
+                            else:
+                                raise getopt.error("WTF")
 
                 # Config Handler
                 case "--config":
@@ -142,7 +160,9 @@ if __name__ == "__main__":
                                 case "n" | "N":
                                     sys.exit()
                                 case _:
-                                    user_answer = input("Please Answer with Y or N: [y/n] ")
+                                    user_answer = input(
+                                        "Please Answer with Y or N: [y/n] "
+                                    )
     except getopt.error as err:
         # Output Error, and Return with an Error Code
         print(str(err))
