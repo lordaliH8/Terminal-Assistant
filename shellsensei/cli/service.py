@@ -74,7 +74,3 @@ def show_version():
 # Show DataBase and Config File Location
 def show_location():
     print("~/.local/share/shellsensei/")
-
-
-def output(msg):
-    print(msg)
