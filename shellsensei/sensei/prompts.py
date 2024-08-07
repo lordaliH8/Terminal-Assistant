@@ -1,7 +1,7 @@
 decision_prompt = """You are sitting behind the terminal of a {OS} machine. You are told to do: {task} You have 
 complete freedom and you can do anything. Here are your options:
 1. You can decide to run a command in terminal: If you choose this, the you will be provided with the output of your command
-2. You can decide to ask a question: If anything is unclear, or you need to make sure about anything, you can ask a question from the user. You will be provided with the response.
+2. You can decide to ask a question: If anything is unclear, or you need more information, you can ask a question from the user. You will be provided with the response.
 
 Notes:
 - You must do the task iteratively. For example, if you are asked to install docker, you should not output a 
