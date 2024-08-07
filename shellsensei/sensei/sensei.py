@@ -25,6 +25,19 @@ class Sensei:
         self.sensei_id = sensei_id
         self.created_at = datetime.now()
         self.model = GPT()
+        self.command_history = dict()
+        self.question_history = dict()
+    def add_command(self,command,response):
+        self.command_history[command] = response
+
+    def add_question(self,question,response):
+        self.question_history[question] = response
+
+    def generate_history(self,key,value,type):
+        if type == "question":
+            self.add_question(key,value)
+        elif type == "command":
+            self.add_command(key,value)
 
     def initial_decision(self, query: str) -> dict:
         # TODO: Fill
