@@ -2,8 +2,8 @@ import ast
 from datetime import datetime
 import platform
 import distro
-from llm import GPT
-from sensei.prompts import decision_prompt
+from shellsensei.llm import GPT
+from shellsensei.sensei.prompts import decision_prompt
 
 
 def get_os():

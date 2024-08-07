@@ -1,4 +1,4 @@
-from sensei import Sensei
+from shellsensei.sensei import Sensei
 
 
 sensei = Sensei(sensei_id="test")

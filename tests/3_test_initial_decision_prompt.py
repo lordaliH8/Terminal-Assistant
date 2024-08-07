@@ -1,6 +1,6 @@
-from sensei.prompts import decision_prompt
-from llm.gpt import GPT
-from sensei.sensei import get_os
+from shellsensei.sensei.prompts import decision_prompt
+from shellsensei.llm.gpt import GPT
+from shellsensei.sensei.sensei import get_os
 import ast
 
 

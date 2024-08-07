@@ -1,8 +1,8 @@
 # Imports
 import getopt
 import sys
-from cli import service
-from db import db
+from shellsensei.cli import service
+from shellsensei.db import db
 
 
 # Arguments - Remove 1st Argument from the List

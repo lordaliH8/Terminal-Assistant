@@ -1,4 +1,4 @@
-from llm import GPT
+from shellsensei.llm import GPT
 
 
 model = GPT(model="gpt-3.5-turbo")
