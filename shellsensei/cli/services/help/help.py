@@ -1,5 +1,7 @@
 # Imports
 import argparse
+import getopt
+
 
 # Global Variables
 app_name = "shellsensei"
@@ -7,24 +9,38 @@ app_version = "0.1"
 
 
 # Show Help
-def show_help():
-    description = f"{app_name} - AI Terminal Assistant"
-    usage = "sensei <OPTIONS> [ARGS] [NUMS][TABLES]"
+def show_help(argsList):
+    if len(argsList) != 1:
+        raise getopt.error("too many arguments")
+    else:
+        description = f"{app_name} - AI Terminal Assistant"
+        usage = (
+            "sensei <OPTIONS> [ARGS] [NUMS]\n"
+            + " " * 7
+            + "sensei <OPTIONS> [ARGS] [TABLES]"
+        )
 
-    # Initialize Parser
-    parser = argparse.ArgumentParser(
-        prog=app_name, description=description, usage=usage
-    )
+        # Initialize Parser
+        parser = argparse.ArgumentParser(
+            prog=app_name, description=description, usage=usage
+        )
 
+        # Help Handler
+        help_handler(parser)
+        # Print Help
+        parser.print_help()
+
+
+# Help Handler
+def help_handler(parser):
     # Add Arguments
     parser.add_argument(
         "-v", "--version", action="help", help="Print version info and exit"
     )
     parser.add_argument(
-        "-m",
-        "--msg <Message>",
+        "-m <PROMPT>",
         action="help",
-        help="Getting the Message to do the Desired Task",
+        help="Getting the Prompt Message to do the Desired Task",
     )
     parser.add_argument(
         "--config init",
@@ -47,9 +63,9 @@ def show_help():
         help="Reset All Data",
     )
     parser.add_argument(
-        "--import <API_KEY>",
+        "--insert <API_KEY>",
         action="help",
-        help="Import your GPT API Key",
+        help="Insert your GPT API Key",
     )
     parser.add_argument(
         "--show <TABLE> [NUM]",
@@ -61,16 +77,3 @@ def show_help():
         action="help",
         help="Remove GPT API Key",
     )
-
-    # Print Help
-    parser.print_help()
-
-
-# Show Version
-def show_version():
-    print(f"{app_name} version {app_version}")
-
-
-# Show DataBase and Config File Location
-def show_location():
-    print("~/.local/share/shellsensei/")
