@@ -1,14 +1,10 @@
 # Imports
 import getopt
 import sys
-from shellsensei.sensei import Sensei
-from shellsensei.cli.services import (
-    prompt, version, show, insert, help, remove, config
-)
-
-sensei = Sensei(sensei_id="test")
+from shellsensei.cli.services import prompt, version, show, insert, help, remove, config
 
 
+# Main Function
 def main() -> None:
     # Arguments - Remove 1st Argument from the List
     argsList = sys.argv[1:]
@@ -38,8 +34,8 @@ def main() -> None:
                     version.show_version(argsList)
 
                 # Prompt Handler
-                case "-m" :
-                    prompt.prompt_handler(currentArgs, values, sensei)
+                case "-m":
+                    prompt.prompt_handler(currentArgs, values)
 
                 # Config Handler
                 case "--config":
