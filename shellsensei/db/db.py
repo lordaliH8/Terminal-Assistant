@@ -24,18 +24,18 @@ def init(folder: str):
 
 
 # Reset DataBase - Clean All Rows from All Tables
-def reset():
-    clean_gpt_table()
-    clean_cmd_table()
-    clean_prompt_table()
+def reset(folder: str):
+    clean_gpt_table(folder)
+    clean_cmd_table(folder)
+    clean_prompt_table(folder)
 
 
 # Import GPT API Key
-def import_gpt_api_key(api_key):
+def import_gpt_api_key(folder: str, api_key):
     # Cost
     cost = "Felan Hichi"
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
@@ -48,9 +48,9 @@ def import_gpt_api_key(api_key):
 
 
 # Show CMD Table with Limit
-def show_cmd_table(limit):
+def show_cmd_table(folder: str, limit):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
@@ -64,9 +64,9 @@ def show_cmd_table(limit):
 
 
 # Show Prompt Table with Limit
-def show_prompt_table(limit):
+def show_prompt_table(folder: str, limit):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
@@ -80,9 +80,9 @@ def show_prompt_table(limit):
 
 
 # Delete All Rows from GPT Table
-def clean_gpt_table():
+def clean_gpt_table(folder: str):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
@@ -95,9 +95,9 @@ def clean_gpt_table():
 
 
 # Delete All Rows from CMD Table
-def clean_cmd_table():
+def clean_cmd_table(folder: str):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
@@ -110,9 +110,9 @@ def clean_cmd_table():
 
 
 # Delete All Rows from Prompt Table
-def clean_prompt_table():
+def clean_prompt_table(folder: str):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
@@ -125,9 +125,9 @@ def clean_prompt_table():
 
 
 # Check if API Key in GPT Table Exists
-def check_if_api_key_exists():
+def check_if_api_key_exists(folder: str):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
