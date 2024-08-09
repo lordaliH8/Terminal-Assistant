@@ -1,9 +1,6 @@
 # Imports
 import getopt
 import sys
-from shellsensei.sensei import Sensei
-
-sensei = Sensei(sensei_id="test")
 
 
 def main() -> None:
@@ -39,7 +36,7 @@ def main() -> None:
                 # Prompt Handler
                 case "-m" :
                     from shellsensei.cli.services.prompt import prompt
-                    prompt.prompt_handler(currentArgs, values, sensei)
+                    prompt.prompt_handler(currentArgs, values)
 
                 # Config Handler
                 case "--config":
