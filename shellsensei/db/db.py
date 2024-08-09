@@ -1,12 +1,13 @@
 # Imports
 import sqlite3
 from shellsensei.db import utils
+import os
 
 
 # Init DataBase
-def init():
+def init(folder: str):
     # Create Connection
-    connection = sqlite3.connect(database="shellsensei_db.db")
+    connection = sqlite3.connect(database=os.path.join(folder, "shellsensei_db.db"))
     # Cursor
     cursor = connection.cursor()
 
