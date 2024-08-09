@@ -28,13 +28,13 @@ def config_handler(argsList, currentArgs, values):
             else:
                 print(get_location())
         case "rm" if values[0] == "cmd" and len(values) == 1:
-            db.clean_cmd_table()
+            db.clean_cmd_table(folder=get_location())
         case "rm" if values[0] == "prompt" and len(values) == 1:
-            db.clean_prompt_table()
+            db.clean_prompt_table(folder=get_location())
         case "reset":
             if len(argsList) != 2:
                 raise getopt.error("too many arguments")
-            db.reset()
+            db.reset(folder=get_location())
 
     # Error Handling for "Too Many Arguments"
     if len(values) > 1:
