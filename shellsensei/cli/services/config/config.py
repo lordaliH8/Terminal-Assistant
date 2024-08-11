@@ -21,20 +21,19 @@ def config_handler(argsList, currentArgs, values):
             if len(argsList) != 2:
                 raise getopt.error("too many arguments")
             else:
-                db.init(folder=get_location())
+                db.get_session(db_url=get_location())
         case "location":
             if len(argsList) != 2:
                 raise getopt.error("too many arguments")
             else:
                 print(get_location())
-        case "rm" if values[0] == "cmd" and len(values) == 1:
-            db.clean_cmd_table(folder=get_location())
-        case "rm" if values[0] == "prompt" and len(values) == 1:
-            db.clean_prompt_table(folder=get_location())
+        case "rm" if len(values) == 1:
+            db.clear_table(table_name=values[0], db_url=get_location())
+            print(f"{values[0]} cleared!")
         case "reset":
             if len(argsList) != 2:
                 raise getopt.error("too many arguments")
-            db.reset(folder=get_location())
+            # db.reset(folder=get_location())
 
     # Error Handling for "Too Many Arguments"
     if len(values) > 1:
