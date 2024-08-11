@@ -7,7 +7,7 @@ Base = declarative_base()
 
 
 class GPT(Base):
-    __tablename__ = 'gpt'
+    __tablename__ = "gpt"
     api_key = Column(String, primary_key=True)
     cost = Column(Float)
 
@@ -16,7 +16,7 @@ class GPT(Base):
 
 
 class Prompt(Base):
-    __tablename__ = 'prompts'
+    __tablename__ = "prompts"
     id = Column(Integer, primary_key=True, autoincrement=True)
     input = Column(String)
     output = Column(String)
@@ -27,7 +27,7 @@ class Prompt(Base):
 
 
 class Command(Base):
-    __tablename__ = 'commands'
+    __tablename__ = "commands"
     id = Column(Integer, primary_key=True, autoincrement=True)
     command = Column(String)
     output = Column(String)
@@ -40,8 +40,8 @@ class Command(Base):
 def get_session(db_url: str):
     if not os.path.exists(db_url):
         os.makedirs(db_url)
-    db_file_path = os.path.join(db_url, 'shellsensei.sqlite')
-    engine = create_engine(f'sqlite:///{db_file_path}')
+    db_file_path = os.path.join(db_url, "shellsensei.sqlite")
+    engine = create_engine(f"sqlite:///{db_file_path}")
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     return Session()

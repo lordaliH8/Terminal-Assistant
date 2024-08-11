@@ -9,7 +9,7 @@ from shellsensei.sensei.prompts import decision_prompt
 def get_os():
     os_name = platform.system()
     if os_name == "Linux":
-        distro_name , os_version = distro.name(),distro.version()
+        distro_name, os_version = distro.name(), distro.version()
         return f"{os_name} ({distro_name} {os_version})"
     elif os_name == "Darwin":
         return "macOS"
@@ -50,7 +50,7 @@ class Sensei:
         elif type == "command":
             self.add_command(key, value)
 
-    def generate_chat_scenario(self,command_history, question_history):
+    def generate_chat_scenario(self, command_history, question_history):
         combined_history = {**command_history, **question_history}
 
         if not combined_history:
@@ -71,11 +71,12 @@ class Sensei:
 
         return scenario_text
 
-
     def initial_decision(self) -> dict:
         # TODO: Fill
-        query = decision_prompt.format(OS=get_os(), task=self.task ,chat_scenario = self.scenario)
-        print("%"* 60)
+        query = decision_prompt.format(
+            OS=get_os(), task=self.task, chat_scenario=self.scenario
+        )
+        print("%" * 60)
         print(query)
         print("%" * 60)
         response = self.model.query(user_prompt=query)

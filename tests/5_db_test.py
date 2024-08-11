@@ -1,6 +1,15 @@
 import os
 import datetime
-from shellsensei.db import get_session, write_gpt, write_command, write_prompt, read_gpt, read_command, read_prompt, clear_table
+from shellsensei.db import (
+    get_session,
+    write_gpt,
+    write_command,
+    write_prompt,
+    read_gpt,
+    read_command,
+    read_prompt,
+    clear_table,
+)
 
 
 def get_location():
@@ -21,9 +30,9 @@ get_session(db_url=db_location)
 clear_table(table_name="gpt", db_url=db_location)
 
 # Add data to tables
-write_gpt('api_key_113', 0.02, db_location)
-write_prompt('Hello', 'Hi there!', datetime.datetime.now(), db_location)
-write_command('greet', 'Hello!', datetime.datetime.now(), db_location)
+write_gpt("api_key_113", 0.02, db_location)
+write_prompt("Hello", "Hi there!", datetime.datetime.now(), db_location)
+write_command("greet", "Hello!", datetime.datetime.now(), db_location)
 
 
 # read data from tables
@@ -43,4 +52,3 @@ print(gpt_user)
 # Clear the tables
 for table in ("gpt", "command", "prompt"):
     clear_table(table, db_location)
-

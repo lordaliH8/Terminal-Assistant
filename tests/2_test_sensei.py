@@ -10,13 +10,8 @@ print(
 
 print("-" * 60)
 
-print(
-    sensei.ask(query="Pull the docker image for my house price prediction project")
-)
+print(sensei.ask(query="Pull the docker image for my house price prediction project"))
 
 print("-" * 60)
 
-print(
-    sensei.ask(query="Pull the docker image")
-)
-
+print(sensei.ask(query="Pull the docker image"))
