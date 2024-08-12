@@ -108,3 +108,13 @@ def clear_table(table_name, db_url: str):
         session.query(table_class).delete()
         session.commit()
     session.close()
+
+
+def check_gpt(db_url: str):
+    session = get_session(db_url)
+    gpt = session.query(GPT).first()
+    session.close()
+    if gpt is not None:
+        return True
+    else:
+        return False
