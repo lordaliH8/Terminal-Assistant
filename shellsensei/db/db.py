@@ -55,9 +55,9 @@ def write_gpt(api_key, cost, db_url: str):
     session.close()
 
 
-def read_gpt(api_key, db_url: str):
+def read_gpt(db_url: str):
     session = get_session(db_url)
-    gpt = session.query(GPT).filter_by(api_key=api_key).first()
+    gpt = session.query(GPT).first()
     session.close()
     return gpt
 
@@ -110,11 +110,7 @@ def clear_table(table_name, db_url: str):
     session.close()
 
 
-def check_gpt(db_url: str):
-    session = get_session(db_url)
-    gpt = session.query(GPT).first()
-    session.close()
-    if gpt is not None:
-        return True
-    else:
-        return False
+def reset(db_url: str):
+    clear_table(table_name="gpt", db_url=db_url)
+    clear_table(table_name="prompts", db_url=db_url)
+    clear_table(table_name="commands", db_url=db_url)
