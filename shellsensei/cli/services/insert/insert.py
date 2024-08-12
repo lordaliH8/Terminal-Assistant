@@ -11,8 +11,9 @@ def insert_handler(currentArgs, values):
         raise getopt.error("too many arguments")
     else:
         api_key = currentArgs
-        check = db.check_gpt(db_url=config.get_location())
-        if check:
+        # Check if GPT Table is Empty or Not
+        row = db.read_gpt(db_url=config.get_location())
+        if row is not None:
             user_answer = input(
                 "API Key Exists - Want to Replace this API Key with the Old One? [y/n] "
             )
