@@ -33,7 +33,7 @@ def config_handler(argsList, currentArgs, values):
         case "reset":
             if len(argsList) != 2:
                 raise getopt.error("too many arguments")
-            # db.reset(folder=get_location())
+            db.reset(db_url=get_location())
 
     # Error Handling for "Too Many Arguments"
     if len(values) > 1:

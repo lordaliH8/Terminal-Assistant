@@ -55,7 +55,7 @@ def help_handler(parser):
     parser.add_argument(
         "--config rm <TABLE>",
         action="help",
-        help="Delete All Rows from <cmd/prompt> Table",
+        help="Delete All Rows from <commands/prompts> Table",
     )
     parser.add_argument(
         "--config reset",
@@ -70,7 +70,7 @@ def help_handler(parser):
     parser.add_argument(
         "--show <TABLE> [NUM]",
         action="help",
-        help="Show Last [NUM] Command from <cmd/prompt> Table",
+        help="Show Last [NUM] Command from <commands/prompts> Table",
     )
     parser.add_argument(
         "--remove",

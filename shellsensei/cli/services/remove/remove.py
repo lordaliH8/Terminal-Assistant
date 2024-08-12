@@ -14,7 +14,7 @@ def remove_handler(argsList):
         while True:
             match user_answer:
                 case "y" | "Y":
-                    db.clean_gpt_table(folder=config.get_location())
+                    db.clear_table(table_name="gpt", db_url=config.get_location())
                     break
                 case "n" | "N":
                     sys.exit()

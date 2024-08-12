@@ -8,23 +8,25 @@ from shellsensei.cli.services import config
 def show_handler(currentArgs, values):
     # Switch Case on currentArgs Variable
     match currentArgs:
-        # CMD
-        case "cmd" if len(values) == 0:
-            limit = 1
-            db.show_cmd_table(folder=config.get_location(), limit=limit)
-        case "cmd" if len(values) == 1:
+        # Command
+        case "command" if len(values) == 0:
+            command = db.read_command(db_url=config.get_location())
+            print(command)
+        case "command" if len(values) == 1:
             limit = int(values[0])
-            db.show_cmd_table(folder=config.get_location(), limit=limit)
+            commands = db.read_command(db_url=config.get_location(), k=limit)
+            print(commands)
         # Prompt
         case "prompt" if len(values) == 0:
-            limit = 1
-            db.show_prompt_table(folder=config.get_location(), limit=limit)
+            prompt = db.read_prompt(db_url=config.get_location())
+            print(prompt)
         case "prompt" if len(values) == 1:
             limit = int(values[0])
-            db.show_prompt_table(folder=config.get_location(), limit=limit)
+            prompts = db.read_prompt(db_url=config.get_location(), k=limit)
+            print(prompts)
     # Error Handling for "Too Many Arguments"
     if len(values) > 1:
         raise getopt.error("too many arguments")
     # Error Handling for "Wrong Arguments"
-    elif currentArgs not in ("cmd", "prompt"):
+    elif currentArgs not in ("command", "prompt"):
         raise getopt.error("wrong argument")
