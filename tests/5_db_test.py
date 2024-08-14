@@ -45,7 +45,7 @@ commands = read_command(db_location)
 print(commands[0])
 
 print("GPT table:")
-gpt_user = read_gpt(api_key="api_key_113", db_url=db_location)
+gpt_user = read_gpt(db_url=db_location)
 print(gpt_user)
 
 
