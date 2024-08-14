@@ -3,7 +3,7 @@ from datetime import datetime
 import platform
 import distro
 from shellsensei.llm import GPT
-from shellsensei.sensei.prompts import decision_prompt
+from shellsensei.sensei.prompts import decision_prompt, question_prompt
 
 
 def get_os():
@@ -76,9 +76,25 @@ class Sensei:
         query = decision_prompt.format(
             OS=get_os(), task=self.task, chat_scenario=self.scenario
         )
+        """
         print("%" * 60)
         print(query)
         print("%" * 60)
+        """
+        response = self.model.query(user_prompt=query)
+        response = ast.literal_eval(response)
+        return response
+
+    def question_decision(self) -> dict:
+        # TODO: Fill
+        query = question_prompt.format(
+            OS=get_os(), task=self.task, question_history=self.question_history
+        )
+        """
+        print("%" * 60)
+        print(query)
+        print("%" * 60)
+        """
         response = self.model.query(user_prompt=query)
         response = ast.literal_eval(response)
         return response
@@ -86,4 +102,9 @@ class Sensei:
     def ask(self) -> dict:
         # 1. Run a command or ask a question
         response = self.initial_decision()
+        return response
+
+    def question(self) -> dict:
+        # 1. Run a command or ask a question
+        response = self.question_decision()
         return response
