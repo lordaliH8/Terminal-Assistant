@@ -18,7 +18,8 @@ Only one if these keys should have a value and the other should be an empty stri
 question_prompt = """You are a terminal assistant agent (TA) sitting behind the terminal of a {OS} machine.
 You have been given the task to {task}. You have been interacting with the user to gather necessary information.
 Now we are in a state where the user has given the task and you have asked a questions based on previous interactions.
-also questions and user answers stored in python dictionary that key is elapsed time and value is list of questions and user answers of that questions.
+also questions and user answers stored in python dictionary that key is elapsed time and value is a python list that first item of list is
+question and second item of list is user answer of that question.
 Here is the mentioned questions and user answers dictionary (also we can call this dictionary previous interactions):
 {question_history}
 
