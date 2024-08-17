@@ -2,6 +2,7 @@ import ast
 from datetime import datetime
 import platform
 import distro
+from typing import List
 from shellsensei.llm import GPT
 from shellsensei.sensei.prompts import decision_prompt, question_prompt
 
@@ -17,6 +18,19 @@ def get_os():
         return f"{os_name} ({platform.release()})"
     else:
         return "Unknown"
+
+
+def validate_model_response(model_response: str, keys: List[str]):
+    try:
+        valid_response = ast.literal_eval(model_response)
+        for key in keys:
+            if key in valid_response.keys():
+                continue
+            else:
+                return None
+        return valid_response
+    except Exception:
+        return None
 
 
 class Sensei:
@@ -57,8 +71,7 @@ class Sensei:
             return f"(user):{self.task}\n(TA): This will be your response (command | question)"
 
         sorted_keys = sorted(combined_history.keys())
-        scenario_lines = []
-        scenario_lines.append(f"(user): {self.task}")
+        scenario_lines = [f"(user): {self.task}"]
 
         for key in sorted_keys:
             ta_text, user_text = combined_history[key]
@@ -76,13 +89,11 @@ class Sensei:
         query = decision_prompt.format(
             OS=get_os(), task=self.task, chat_scenario=self.scenario
         )
-        """
-        print("%" * 60)
-        print(query)
-        print("%" * 60)
-        """
-        response = self.model.query(user_prompt=query)
-        response = ast.literal_eval(response)
+
+        response = None
+        while response is None:
+            response = self.model.query(user_prompt=query)
+            response = validate_model_response(response, keys=['question', 'command'])
         return response
 
     def question_decision(self) -> dict:
