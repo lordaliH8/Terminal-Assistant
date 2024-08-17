@@ -1,6 +1,6 @@
-# Terminal-Assistance
+# Terminal-Assistant
 
-Terminal Assistance 🧠
+Terminal Assistant 🧠
 
 ## Makefile
 
