@@ -1,10 +1,13 @@
 from shellsensei.sensei import Sensei
+from shellsensei.llm import GPT
 
 
 class Session(Sensei):
 
     def __init__(self, sensei_id: str):
         super().__init__(sensei_id)
+        # TODO: 0. Read API KEY from DB - Raise error if not existing
+        # self.model = GPT(OPENAI_API_KEY="")
 
     # TODO: 1. Fill this
     def starting_command(self, command: str):
