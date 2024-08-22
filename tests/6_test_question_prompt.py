@@ -8,7 +8,10 @@ model = GPT()
 task = "remove one of my docker images"
 question_history = {
     "0s": ["Which docker image do you want to remove?", "jenkins"],
-    "2s": ["Are you sure you want to remove the docker image 'jenkins'? (yes/no)", "yes"],
+    "2s": [
+        "Are you sure you want to remove the docker image 'jenkins'? (yes/no)",
+        "yes",
+    ],
 }
 """
 question_history = {

@@ -6,7 +6,9 @@ from decouple import config
 
 class GPT:
     def __init__(self, model: str = "gpt-3.5-turbo", OPENAI_API_KEY: str = None):
-        self.OPENAI_API_KEY = config("OPENAI_API_KEY") if OPENAI_API_KEY is None else OPENAI_API_KEY
+        self.OPENAI_API_KEY = (
+            config("OPENAI_API_KEY") if OPENAI_API_KEY is None else OPENAI_API_KEY
+        )
         self.client = OpenAI(api_key=self.OPENAI_API_KEY)
 
         self.model = model

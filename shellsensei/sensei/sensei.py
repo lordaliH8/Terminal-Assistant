@@ -93,7 +93,7 @@ class Sensei:
         response = None
         while response is None:
             response = self.model.query(user_prompt=query)
-            response = validate_model_response(response, keys=['question', 'command'])
+            response = validate_model_response(response, keys=["question", "command"])
         return response
 
     def question_decision(self) -> dict:
