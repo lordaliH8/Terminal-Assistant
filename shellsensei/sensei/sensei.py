@@ -1,36 +1,7 @@
-import ast
 from datetime import datetime
-import platform
-import distro
-from typing import List
+import shellsensei.sensei.utils as utils
 from shellsensei.llm import GPT
-from shellsensei.sensei.prompts import decision_prompt, question_prompt
-
-
-def get_os():
-    os_name = platform.system()
-    if os_name == "Linux":
-        distro_name, os_version = distro.name(), distro.version()
-        return f"{os_name} ({distro_name} {os_version})"
-    elif os_name == "Darwin":
-        return "macOS"
-    elif os_name == "Windows":
-        return f"{os_name} ({platform.release()})"
-    else:
-        return "Unknown"
-
-
-def validate_model_response(model_response: str, keys: List[str]):
-    try:
-        valid_response = ast.literal_eval(model_response)
-        for key in keys:
-            if key in valid_response.keys():
-                continue
-            else:
-                return None
-        return valid_response
-    except Exception:
-        return None
+from shellsensei.sensei.prompts import decision_prompt
 
 
 class Sensei:
@@ -87,35 +58,18 @@ class Sensei:
     def initial_decision(self) -> dict:
         # TODO: Fill
         query = decision_prompt.format(
-            OS=get_os(), task=self.task, chat_scenario=self.scenario
+            OS=utils.get_os(), task=self.task, chat_scenario=self.scenario
         )
 
         response = None
         while response is None:
             response = self.model.query(user_prompt=query)
-            response = validate_model_response(response, keys=["question", "command"])
-        return response
-
-    def question_decision(self) -> dict:
-        # TODO: Fill
-        query = question_prompt.format(
-            OS=get_os(), task=self.task, question_history=self.question_history
-        )
-        """
-        print("%" * 60)
-        print(query)
-        print("%" * 60)
-        """
-        response = self.model.query(user_prompt=query)
-        response = ast.literal_eval(response)
+            response = utils.validate_model_response(
+                response, keys=["question", "command"]
+            )
         return response
 
     def ask(self) -> dict:
         # 1. Run a command or ask a question
         response = self.initial_decision()
-        return response
-
-    def question(self) -> dict:
-        # 1. Run a command or ask a question
-        response = self.question_decision()
         return response
